@@ -10,9 +10,6 @@ import {
 class DishDetail extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-    };
   }
 
   renderDish(dish) {
