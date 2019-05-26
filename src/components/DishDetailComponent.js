@@ -28,7 +28,6 @@ class DishDetail extends Component {
   }
 
   renderComments(comments) {
-    console.log(comments);
     if (comments) {
       return (
         <div>
