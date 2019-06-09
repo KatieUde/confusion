@@ -10,6 +10,12 @@ import {
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
+const required = (value) => value && value.length;
+const maxLength = (length) => (value) => !(value) || (value.length <= length);
+const minLength = (length) => (value) => (value) && (value.length >= length);
+const isNumber = (value) => !isNaN(Number(value));
+const validEmail = (value) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+
 class Contact extends Component {
   constructor(props) {
     super(props);
@@ -23,8 +29,6 @@ class Contact extends Component {
   }
 
   render() {
-    // const { firstname, lastname, telnum, email, agree, contactType, message, touched } = this.state;
-
     return (
       <div className="container">
         <div className="row">
@@ -86,6 +90,21 @@ class Contact extends Component {
                     name="firstname"
                     placeholder="First Name"
                     className="form-control"
+                    validators={{
+                      required,
+                      minLength: minLength(3),
+                      maxLength: maxLength(15)
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".firstname"
+                    show="touched"
+                    messages={{
+                      required: 'Required. ',
+                      minLength: 'Must be greater than 2 characters. ',
+                      maxLength: 'Must be 15 characters or less. '
+                    }}
                   />
                 </Col>
               </Row>
@@ -98,6 +117,21 @@ class Contact extends Component {
                     name="lastname"
                     placeholder="Last Name"
                     className="form-control"
+                    validators={{
+                      required,
+                      minLength: minLength(3),
+                      maxLength: maxLength(15)
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".lastname"
+                    show="touched"
+                    messages={{
+                      required: 'Required. ',
+                      minLength: 'Must be greater than 2 characters. ',
+                      maxLength: 'Must be 15 characters or less. '
+                    }}
                   />
                 </Col>
               </Row>
@@ -110,6 +144,23 @@ class Contact extends Component {
                     name="telnum"
                     placeholder="Tel. number"
                     className="form-control"
+                    validators={{
+                      required,
+                      minLength: minLength(3),
+                      maxLength: maxLength(15),
+                      isNumber
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".telnum"
+                    show="touched"
+                    messages={{
+                      required: 'Required. ',
+                      minLength: 'Must be greater than 2 numbers. ',
+                      maxLength: 'Must be 15 numbers or less. ',
+                      isNumber: 'Must be a number'
+                    }}
                   />
                 </Col>
               </Row>
@@ -122,6 +173,19 @@ class Contact extends Component {
                     name="email"
                     placeholder="Email"
                     className="form-control"
+                    validators={{
+                      required,
+                      validEmail
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".email"
+                    show="touched"
+                    messages={{
+                      required: 'Required. ',
+                      validEmail: 'Invalid Email Address'
+                    }}
                   />
                 </Col>
               </Row>
