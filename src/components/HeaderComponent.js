@@ -51,7 +51,7 @@ class Header extends Component {
   }
 
   render() {
-    const { isNavOpen} = this.state;
+    const { isNavOpen, isModalOpen } = this.state;
 
     return (
       <React.Fragment>
@@ -92,7 +92,8 @@ class Header extends Component {
               <Nav className="ml-auto" navbar>
                 <NavItem>
                   <Button outline onClick={this.toggleModal}>
-                    <span className="fa fa-sign-in fa-lg">{' '}Login</span>
+                    <span className="fa fa-sign-in fa-lg"></span>{' '}
+                    Login
                   </Button>
                 </NavItem>
               </Nav>
@@ -109,7 +110,7 @@ class Header extends Component {
             </div>
           </div>
         </Jumbotron>
-        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+        <Modal isOpen={isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.handleLogin}>
