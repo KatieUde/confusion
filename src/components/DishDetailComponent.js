@@ -115,7 +115,7 @@ class CommentForm extends Component {
               </Row>
               <Row className="form-group">
                 <Col md={12}>
-                  <Button type="submit" color="primary" data-dismiss="modal">
+                  <Button type="submit" color="primary">
                     Submit
                   </Button>
                 </Col>
