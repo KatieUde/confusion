@@ -16,8 +16,24 @@ export const fetchDishes = () => (dispatch) => {
   dispatch(dishesLoading(true));
 
   return fetch(baseUrl + 'dishes')
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        // Error message that is returned from the server in a response
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+      // Catching error if there is NO response from the server
+      var errorMessage = new Error(error.message);
+      throw errorMessage;
+    })
     .then(response => response.json())
-    .then(dishes => dispatch(addDishes(dishes)));
+    .then(dishes => dispatch(addDishes(dishes)))
+    .catch(error => dispatch(dishesFailed(error.message)));
 }
 
 export const dishesLoading = () => ({
@@ -41,8 +57,24 @@ export const commentsFailed = (errorMessage) => ({
 
 export const fetchComments = () => (dispatch) => {
   return fetch(baseUrl + 'comments')
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        // Error message that is returned from the server in a response
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+      // Catching error if there is NO response from the server
+      var errorMessage = new Error(error.message);
+      throw errorMessage;
+    })
     .then(response => response.json())
-    .then(comments => dispatch(addComments(comments)));
+    .then(comments => dispatch(addComments(comments)))
+    .catch(error => dispatch(commentsFailed(error.message)));
 }
 
 export const addComments = (comments) => ({
@@ -56,8 +88,24 @@ export const fetchPromos = () => (dispatch) => {
   dispatch(promosLoading(true));
 
   return fetch(baseUrl + 'promotions')
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        // Error message that is returned from the server in a response
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+      // Catching error if there is NO response from the server
+      var errorMessage = new Error(error.message);
+      throw errorMessage;
+    })
     .then(response => response.json())
-    .then(promos => dispatch(addPromos(promos)));
+    .then(promos => dispatch(addPromos(promos)))
+    .catch(error => dispatch(promosFailed(error.message)));
 }
 
 export const promosLoading = () => ({
