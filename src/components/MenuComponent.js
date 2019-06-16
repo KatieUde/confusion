@@ -8,31 +8,49 @@ import {
   BreadcrumbItem
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
-  function RenderMenuItem({ dish }) {
-    return(
-      <Card>
-        <Link to={`/menu/${dish.id}`}>
-          <CardImg width="100%" src={dish.image} alt={dish.name} />
-          <CardImgOverlay>
-            <CardTitle>{dish.name}</CardTitle>
-          </CardImgOverlay>
-        </Link>
-      </Card>
-    );
-  }
+function RenderMenuItem({ dish }) {
+  return(
+    <Card>
+      <Link to={`/menu/${dish.id}`}>
+        <CardImg width="100%" src={dish.image} alt={dish.name} />
+        <CardImgOverlay>
+          <CardTitle>{dish.name}</CardTitle>
+        </CardImgOverlay>
+      </Link>
+    </Card>
+  );
+}
 
-  const Menu = (props) => {
-    const { dishes } = props;
+const Menu = (props) => {
+  const { dishes, isLoading, errorMessage } = props;
 
-    const menu = dishes.map((dish) => {
-      return (
-        <div key={dish.id} className="col-12 col-md-5 m-1">
-          <RenderMenuItem dish={dish} />
+  const menu = dishes.dishes.map((dish) => {
+    return (
+      <div key={dish.id} className="col-12 col-md-5 m-1">
+        <RenderMenuItem dish={dish} />
+      </div>
+    )
+  });
+
+  if (dishes.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
         </div>
-      )
-    });
-
+      </div>
+    );
+  } else if (dishes.errorMessage) {
+    return (
+      <div className="container">
+        <div className="row">
+          <h4>{errorMessage}</h4>
+        </div>
+      </div>
+    );
+  } else {
     return (
       <div className="container">
         <div className="row">
@@ -53,5 +71,6 @@ import { Link } from 'react-router-dom';
       </div>
     );
   }
+}
 
 export default Menu;
