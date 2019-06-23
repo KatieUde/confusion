@@ -91,8 +91,6 @@ export const postFeedback = (firstname, lastname, telnum, email, agree, contactT
   alert('Your comment could not be posted\nError: ' + error.message)});
 }
 
-
-
 export const fetchDishes = () => (dispatch) => {
   dispatch(dishesLoading(true));
 

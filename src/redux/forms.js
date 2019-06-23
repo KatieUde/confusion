@@ -11,9 +11,7 @@ export const InitialFeedback = (state = {
 }, action) => {
   switch(action.type) {
     case ActionTypes.ADD_FEEDBACK:
-      var feedback = action.payload;
-
-      return {...state};
+      return {...state, feedback: action.payload};
 
     default:
       return state;

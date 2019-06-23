@@ -39,9 +39,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.fetchDishes();
@@ -51,7 +48,7 @@ class Main extends Component {
   }
 
   render() {
-    const { comments, dishes, leaders, promotions, selectedDish, resetFeedbackForm, postComment, postFeedback } = this.props
+    const { comments, dishes, leaders, promotions, resetFeedbackForm, postComment, postFeedback } = this.props
 
     const HomePage = () => {
       return (
